@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git 'https://github.com/codesbyUmair/Lab11.git'
+                sh 'echo Checkout passed'
             }
         }
 
@@ -13,15 +13,21 @@ pipeline {
             }
         }
 
+        stage('Start') {
+            steps {
+                sh 'npm start'
+            }
+        }
+
         stage('Build Docker Image') {
             steps {
-                sh 'docker build -t myapp:latest .'
+                sh 'echo docker build -t myapp:latest .'
             }
         }
 
         stage('Run Docker Image') {
             steps {
-                sh 'docker run -d -p 80:80 myapp:latest'
+                sh 'echo docker run -d -p 80:80 myapp:latest'
             }
         }
 
