@@ -17,24 +17,19 @@ pipeline {
 
         stage('Build Docker Image') {
             steps {
-                sh 'echo docker_build_-t_myapp:latest_.'
+                sh 'echo docker build -t myapp:latest .'
             }
         }
 
         stage('Run Docker Image') {
             steps {
-                sh 'echo docker_run_-d_-p_80:80_myapp:latest'
+                sh 'echo docker run -d -p 80:80 myapp:latest'
             }
         }
 
         stage('Push Docker Image') {
             steps {
-                script {
-                    echo 'Pushing Docker image to Docker Hub...'
-                    docker.withRegistry('https://index.docker.io/v1/', 'docker-hub-credentials') {
-                        docker.image('myapp:latest').push()
-                    }
-                    echo 'Docker image pushed successfully.'
+                sh 'echo docker push UmairAhmed/Lab11:latest'
                 }
             }
         }
